@@ -8,4 +8,14 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  modules: [
+    // ...
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+  ],
+  runtimeConfig: {
+    public: {
+      rapidApiKey: process.env.NUXT_RAPIDAPI_KEY,
+    },
+  },
 });

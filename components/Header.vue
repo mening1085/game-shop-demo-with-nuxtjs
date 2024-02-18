@@ -1,23 +1,45 @@
 <template>
-  <header class="bg-gray-900 text-white">
-    <div class="container mx-auto flex justify-between items-center h-[50px]">
+  <header class="main-bg text-white">
+    <div class="px-6 flex justify-between items-center h-[60px]">
       <div class="uppercase">
-        <nuxt-link to="/">Free to play</nuxt-link>
+        <nuxt-link to="/" class="text-red-500 font-bold text-2xl">
+          Free to play
+        </nuxt-link>
       </div>
       <ul class="flex gap-4">
         <li>
-          <nuxt-link to="/">Home</nuxt-link>
+          <nuxt-link class="item" to="/">
+            <Icon icon="mdi:home" />
+            Home
+          </nuxt-link>
         </li>
-        <li>
-          <nuxt-link to="/about">About</nuxt-link>
+        <li class="relative">
+          <nuxt-link class="item" to="/favorite">
+            <Icon icon="material-symbols:favorite" />
+            Favorite
+          </nuxt-link>
+          <span
+            v-if="favorites.length > 0"
+            class="absolute top-[-10px] right-[-10px] bg-red-500 flex justify-center items-center rounded-full text-xs px-1"
+          >
+            {{ favorites.length }}
+          </span>
         </li>
       </ul>
     </div>
   </header>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { Icon } from "@iconify/vue";
+import { useFavoriteStore } from "../stores/favorites";
+
+const store = useFavoriteStore();
+const favorites = computed(() => store.favorites);
 </script>
 
-<style></style>
+<style lang="css">
+.item {
+  @apply flex items-center;
+}
+</style>
